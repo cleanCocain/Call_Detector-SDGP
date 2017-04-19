@@ -13,18 +13,18 @@ public void onTokenRefresh() {
 <service
     android:name=".MyFirebaseMessagingService">
     <intent-filter>
-        <action android:name="call.firebase.MESSAGING_EVENT"/>
+        <action android:name="message.firebase.MESSAGING_EVENT"/>
     </intent-filter>
 </service>
 <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
     
 <meta-data
-    android:name="call.firebase.messaging.default_notification_icon"
+    android:name="message.firebase.messaging.default_notification_icon"
     android:resource="@drawable/ic_stat_ic_notification" />
 <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
      notification message. 
 <meta-data
-    android:name="call.firebase.messaging.default_notification_color"
+    android:name="message.firebase.messaging.default_notification_color"
     android:resource="@color/colorAccent" />
 
 @Override
