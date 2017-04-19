@@ -1,0 +1,11 @@
+#include <camera_VC0706.h>
+#include <SD.h>
+#Include <SoftwareSerial.h>
+
+#define chipSelect 10
+#if ARDUINO >= 100
+SoftwareSerial cameraconnection= SoftwareSerial(2,3);
+#else
+NewSoftSerial cameraconnection = newSoftSerial(2,3);
+#endif
+Camera_Vc0706 cam  = camera_VC0706(&cameraconnection);
