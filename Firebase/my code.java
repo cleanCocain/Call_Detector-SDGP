@@ -1,57 +1,81 @@
 
-@Override
-public void onTokenRefresh() {
-    // Get updated InstanceID token.
-    String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-    Log.d(TAG, "Refreshed token: " + refreshedToken);
 
-    // If you want to send messages to this application instance or
-    // manage this apps subscriptions on the server side, send the
-    // Instance ID token to your app server.
-    sendRegistrationToServer(refreshedToken);
-}
-<service
-    android:name=".MyFirebaseMessagingService">
-    <intent-filter>
-        <action android:name="message.firebase.MESSAGING_EVENT"/>
-    </intent-filter>
-</service>
-<!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
+package firebase.quickstart.firebasestorage;
+
+import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
+
+import java.util.Locale;
+
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = "Storage#MainActivity";
+
+
     
-<meta-data
-    android:name="message.firebase.messaging.default_notification_icon"
-    android:resource="@drawable/ic_stat_ic_notification" />
-<!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-     notification message. 
-<meta-data
-    android:name="message.firebase.messaging.default_notification_color"
-    android:resource="@color/colorAccent" />
+    private ProgressDialog mProgressDialog;
+    private FirebaseAuth mAuth;
 
-@Override
-public void onMessageReceived(RemoteMessage remoteMessage) {
-    // ...
+    
 
-    // TODO(developer): Handle FCM messages here.
-    // Not getting messages here? See why this may be: 
-    Log.d(TAG, "From: " + remoteMessage.getFrom());
+    private void showMessageDialog(String title, String message) {
+        AlertDialog ad = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage("Tne person you are calling is riding bike. please call later")
+                .create();
+        ad.show();
+    }
 
-    // Check if message contains a data payload.
-    if (remoteMessage.getData().size() > 0) {
-        Log.d(TAG, "Message data payload: " + remoteMessage.getData());
-
-        if (/* Check if data needs to be processed by long running job */ true) {
-            // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-            scheduleJob();
-        } else {
-          
-            handleNow();
+    private void showProgressDialog(String caption) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setIndeterminate(true);
         }
 
+        mProgressDialog.setMessage(caption);
+        mProgressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int i = item.getItemId();
+        if (i == R.id.action_logout) {
+            FirebaseAuth.getInstance().signOut();
+            updateUI(null);
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     
-    if (remoteMessage.getNotification() != null) {
-        Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-    }
-
 }
