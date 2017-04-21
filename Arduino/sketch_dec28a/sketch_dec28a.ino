@@ -127,29 +127,6 @@ void stand(){
     standS1=false;
   }
 
-//  if(digitalRead(buttonPin)==HIGH && standS == true){
-//    
-//    digitalWrite(led,LOW);
-//
-//    state = "yes";
-//    BTserial.print(state);
-//    delay(1000);
-//
-//    BTserial.flush();
-//
-//
-//  }else{
-//    standS = false;
-//     digitalWrite(led,HIGH);
-//
-//
-//    delay(1000);
-//
-//
-//    BTserial.flush();
-//   
-//  }
-
 }
 
 
