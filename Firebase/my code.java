@@ -12,13 +12,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "Storage#MainActivity";
-
-
     
     private ProgressDialog mProgressDialog;
     private FirebaseAuth mAuth;
-
-    
 
     private void showMessageDialog(String title, String message) {
         AlertDialog ad = new AlertDialog.Builder(this)
