@@ -14,11 +14,9 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Started");
 
-  // GPS Setup
   serialGPS.begin(4800);
   digitalWrite(GPS2,HIGH);
 
-  // Cut first gibberish
   while(serialGPS.available())
     if (serialGPS.read() == '\r')
       break;
