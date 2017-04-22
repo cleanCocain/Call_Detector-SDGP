@@ -83,11 +83,7 @@ void Bluetooth (){
          c=' ';
          
           }
-//        }else if(color == "off"){
-//          get = false;
-//          digitalWrite(ledPin, LOW);
-//          delay(20);
-//        }
+
     }
  
 color ="";
