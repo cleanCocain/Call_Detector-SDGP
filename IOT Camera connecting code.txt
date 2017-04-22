@@ -1,5 +1,6 @@
 #include <camera_VC0706.h>
 #include <SD.h>
+
 #Include <SoftwareSerial.h>
 
 #define chipSelect 10
